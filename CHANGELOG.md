@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.2 (2022-08-29)
+
+
+### Features
+
+* Adding demo ([a2ebe57](https://github.com/christopher-caldwell/ui-components/commit/a2ebe57c568bc8088627047a3cb9398c1632fc9d))
+* Updating to use built in pagination ([e26bf26](https://github.com/christopher-caldwell/ui-components/commit/e26bf26ad82fa1b3dd9ad8e6923c56023db45be0))
+
+
+### Bug Fixes
+
+* Updating from form gen ([928a870](https://github.com/christopher-caldwell/ui-components/commit/928a87064c4c0827b481db670d0a67b2e9dcda55))
+
 ### [0.0.5](https://github.com/christopher-caldwell/mui-form-generator/compare/v0.0.4...v0.0.5) (2022-08-26)
 
 
