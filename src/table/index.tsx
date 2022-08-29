@@ -6,7 +6,8 @@ import {
   getSortedRowModel,
   SortingState,
   useReactTable,
-  HeaderGroup
+  HeaderGroup,
+  getPaginationRowModel
 } from '@tanstack/react-table'
 import {
   TableContainer,
@@ -23,16 +24,12 @@ import {
   SxProps
 } from '@mui/material'
 
-import { UsePaginationResult, TablePaginationActions } from './Pagination'
+import { TablePaginationActions } from './Pagination'
 
 export const Table = function <TData>({
   columns,
   items,
   isLoading,
-  rowsPerPage,
-  page,
-  handleChangePage,
-  handleChangeRowsPerPage,
   total,
   sortingHandler,
   rowsPerPageOptions = defaultRowsPerPageOptions,
@@ -47,11 +44,13 @@ export const Table = function <TData>({
     },
     onSortingChange: sortingHandler[1],
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel()
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
   })
 
   const headerGroups = table.getHeaderGroups()
   const LoadingRows = generateLoadingRows<TData>(headerGroups)
+  const borderColor = `1px solid ${colors.border}`
 
   const rows = table.getRowModel().rows
   const Results = rows.length ? (
@@ -60,7 +59,7 @@ export const Table = function <TData>({
         <TableRow key={row.id} hover sx={{ backgroundColor: ({ palette: { background } }) => background.paper }}>
           {row.getVisibleCells().map(cell => {
             return (
-              <TableCell sx={{ borderRight: colors.border }} key={cell.id}>
+              <TableCell sx={{ borderRight: borderColor }} key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </TableCell>
             )
@@ -89,7 +88,7 @@ export const Table = function <TData>({
                   const sortDirection = isSortedDesc ? 'desc' : 'asc'
                   return (
                     <TableCell
-                      sx={{ borderRight: `1px solid ${colors.border}`, backgroundColor: colors.headerBackground }}
+                      sx={{ borderRight: borderColor, backgroundColor: colors.headerBackground }}
                       key={id}
                       colSpan={colSpan}
                       sortDirection={sortDirection}
@@ -112,17 +111,17 @@ export const Table = function <TData>({
         component='div'
         rowsPerPageOptions={rowsPerPageOptions}
         count={total}
-        rowsPerPage={rowsPerPage}
-        page={page}
+        rowsPerPage={table.getState().pagination.pageSize}
+        page={table.getState().pagination.pageIndex}
         SelectProps={{
           inputProps: {
             'aria-label': 'rows per page'
           },
           native: true
         }}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        ActionsComponent={TablePaginationActions}
+        onPageChange={(_, page) => table.setPageIndex(page - 1)}
+        onRowsPerPageChange={e => table.setPageSize(Number(e.target.value))}
+        ActionsComponent={() => <TablePaginationActions table={table} />}
       />
     </>
   )
@@ -145,7 +144,7 @@ interface TableColors {
   headerBackground?: string
   headerText?: string
 }
-interface Props<TData> extends UsePaginationResult {
+interface Props<TData> {
   items: TData[]
   columns: ColumnDef<TData>[]
   sortingHandler: [SortingState, Dispatch<SetStateAction<SortingState>>]
