@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/christopher-caldwell/ui-components/compare/v0.0.2...v0.0.3) (2022-08-30)
+
+
+### Features
+
+* Adding action modal ([e0b835b](https://github.com/christopher-caldwell/ui-components/commit/e0b835b87ecc10a96bae5a4a5b021f2c2618ec2d))
+
 ### 0.0.2 (2022-08-29)
 
 
