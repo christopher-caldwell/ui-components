@@ -5,6 +5,7 @@ import { Section } from '@caldwell619/ui-components'
 import { Header } from '@/components'
 import { PersonTable } from '@/features/table'
 import { SalesPerformanceGraph } from '@/features/graph'
+import { ActionModalDisplay } from '@/features/action-modal'
 
 const App: FC = () => {
   return (
@@ -16,6 +17,9 @@ const App: FC = () => {
       </Section>
       <Section header='People' paperSx={{ padding: 0 }}>
         <PersonTable />
+      </Section>
+      <Section header='Action Modal'>
+        <ActionModalDisplay />
       </Section>
     </>
   )

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import {
   ColumnDef,
   flexRender,
@@ -47,6 +47,11 @@ export const Table = function <TData>({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel()
   })
+
+  useEffect(() => {
+    if (!rowsPerPageOptions?.[0]) return
+    table.setPageSize(typeof rowsPerPageOptions[0] === 'number' ? rowsPerPageOptions[0] : rowsPerPageOptions[0].value)
+  }, [rowsPerPageOptions, table])
 
   const headerGroups = table.getHeaderGroups()
   const LoadingRows = generateLoadingRows<TData>(headerGroups)
