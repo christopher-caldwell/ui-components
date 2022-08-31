@@ -4,7 +4,7 @@ import { Grid, styled, useTheme } from '@mui/material'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import shouldForwardProp from '@emotion/is-prop-valid'
 
-export const Graph = function <TData>({ itemGroups, primaryAxis, secondaryAxes, colors = [] }: Props<TData>) {
+export const Graph = function <TData>({ itemGroups, primaryAxis, secondaryAxes, colors }: Props<TData>) {
   const {
     palette: {
       primary: { main: primary },
@@ -31,7 +31,7 @@ export const Graph = function <TData>({ itemGroups, primaryAxis, secondaryAxes, 
                   options={{
                     data,
                     interactionMode: 'closest',
-                    defaultColors: [primary, secondary, ...colors],
+                    defaultColors: colors || [primary, secondary],
                     primaryAxis,
                     secondaryAxes
                   }}
