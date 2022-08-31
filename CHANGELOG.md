@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/christopher-caldwell/ui-components/compare/v0.0.4...v0.0.5) (2022-08-31)
+
+
+### Bug Fixes
+
+* Falling back to theme if colors not provided ([f04b617](https://github.com/christopher-caldwell/ui-components/commit/f04b61762ccc9d6b492f3b25e0b70c0b1ba40459))
+
 ### [0.0.4](https://github.com/christopher-caldwell/ui-components/compare/v0.0.3...v0.0.4) (2022-08-31)
 
 
