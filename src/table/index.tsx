@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import {
   ColumnDef,
-  flexRender,
   getCoreRowModel,
   getSortedRowModel,
   SortingState,
@@ -14,19 +13,16 @@ import {
   Table as MuiTable,
   TableBody,
   TableCell,
-  TableHead,
   TableRow,
   TablePagination,
-  Box,
   Skeleton,
-  TableSortLabel,
   TablePaginationProps,
   SxProps
 } from '@mui/material'
 
-import { TablePaginationActions } from './Pagination'
+import { TableColors, TableHead, TablePaginationActions, Results } from './components'
 
-export const Table = function <TData>({
+export const Table = function <TData extends { id: number | string | undefined }>({
   columns,
   items,
   isLoading,
@@ -34,7 +30,8 @@ export const Table = function <TData>({
   sortingHandler,
   rowsPerPageOptions = defaultRowsPerPageOptions,
   colors = defaultColors,
-  tableContainerSx = defaultTableContainerSx
+  tableContainerSx = defaultTableContainerSx,
+  goesToPath
 }: Props<TData>) {
   const table = useReactTable({
     data: items,
@@ -55,61 +52,15 @@ export const Table = function <TData>({
 
   const headerGroups = table.getHeaderGroups()
   const LoadingRows = generateLoadingRows<TData>(headerGroups)
-  const borderColor = `1px solid ${colors.border}`
-
-  const rows = table.getRowModel().rows
-  const Results = rows.length ? (
-    rows.map(row => {
-      return (
-        <TableRow key={row.id} hover sx={{ backgroundColor: ({ palette: { background } }) => background.paper }}>
-          {row.getVisibleCells().map(cell => {
-            return (
-              <TableCell sx={{ borderRight: borderColor }} key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </TableCell>
-            )
-          })}
-        </TableRow>
-      )
-    })
-  ) : (
-    <TableRow sx={{ height: 200 }}>
-      <TableCell colSpan={10000}>
-        <Box sx={{ textAlign: 'center' }}>No Results</Box>
-      </TableCell>
-    </TableRow>
-  )
 
   return (
     <>
       <TableContainer sx={tableContainerSx}>
         <MuiTable stickyHeader>
-          <TableHead>
-            {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map(({ colSpan, id, column, getContext }) => {
-                  const isSorted = !!column.getIsSorted()
-                  const isSortedDesc = column.getIsSorted() === 'desc'
-                  const sortDirection = isSortedDesc ? 'desc' : 'asc'
-                  return (
-                    <TableCell
-                      sx={{ borderRight: borderColor, backgroundColor: colors.headerBackground }}
-                      key={id}
-                      colSpan={colSpan}
-                      sortDirection={sortDirection}
-                      onClick={column.getToggleSortingHandler()}
-                    >
-                      {/* TODO: check if can be sorted: column.getCanSort() */}
-                      <TableSortLabel sx={{ color: colors.headerText }} active={isSorted} direction={sortDirection}>
-                        {flexRender(column.columnDef.header, getContext())}
-                      </TableSortLabel>
-                    </TableCell>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHead>
-          <TableBody>{isLoading ? LoadingRows : Results}</TableBody>
+          <TableHead table={table} colors={colors} />
+          <TableBody>
+            {isLoading ? LoadingRows : <Results table={table} colors={colors} goesToPath={goesToPath} />}
+          </TableBody>
         </MuiTable>
       </TableContainer>
       <TablePagination
@@ -144,11 +95,6 @@ const generateLoadingRows = function <TData>(headers: HeaderGroup<TData>[]) {
   ))
 }
 
-interface TableColors {
-  border?: string
-  headerBackground?: string
-  headerText?: string
-}
 interface Props<TData> {
   items: TData[]
   columns: ColumnDef<TData>[]
@@ -158,6 +104,8 @@ interface Props<TData> {
   colors?: TableColors
   rowsPerPageOptions?: TablePaginationProps['rowsPerPageOptions']
   tableContainerSx?: SxProps
+  /** If present, rows will be rendered as Links, and will navigate to `/${goesToPath}/${row.id}` */
+  goesToPath?: string
 }
 
 const defaultTableContainerSx: SxProps = { maxHeight: '70vh', borderRadius: '12px' }
@@ -168,5 +116,3 @@ const defaultColors: TableColors = {
   headerBackground: 'rgb(246,247,248)',
   headerText: '#888888'
 }
-
-export * from './Pagination'

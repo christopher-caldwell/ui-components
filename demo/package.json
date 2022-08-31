@@ -13,21 +13,21 @@
   "dependencies": {
     "@caldwell619/react-hooks": "^0.0.10",
     "@caldwell619/ui-components": "link:../",
-    "@emotion/react": "^11.7.0",
-    "@emotion/styled": "^11.6.0",
+    "@emotion/react": "link:../@emotion/react",
+    "@emotion/styled": "link:../@emotion/styled",
     "@faker-js/faker": "^7.4.0",
-    "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.10.1",
-    "@tanstack/react-table": "^8.5.11",
+    "@mui/icons-material": "link:../@mui/icons-material",
+    "@mui/material": "link:../@mui/material",
+    "@tanstack/react-table": "link:../@tanstack/react-table",
     "array-sort": "^1.0.0",
     "date-fns": "^2.29.2",
     "deep-object-diff": "^1.1.0",
     "gh-pages": "^3.2.3",
     "numeral": "^2.0.6",
-    "react": "^17.0.2",
-    "react-charts": "3.0.0-beta.30",
-    "react-dom": "^17.0.2",
-    "react-virtualized-auto-sizer": "^1.0.6",
+    "react": "link:../react",
+    "react-charts": "link:../react-charts",
+    "react-dom": "link:../react-dom",
+    "react-virtualized-auto-sizer": "link:../react-virtualized-auto-sizer",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -46,8 +46,7 @@
     "rollup-plugin-visualizer": "^5.5.2",
     "typescript": "^4.1.2",
     "vite": "^2.0.1",
-    "vite-plugin-checker": "^0.3.4",
-    "vite-plugin-prismjs": "^0.0.8"
+    "vite-plugin-checker": "^0.3.4"
   },
   "browserslist": {
     "production": [
