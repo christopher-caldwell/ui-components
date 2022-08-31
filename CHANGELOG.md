@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/christopher-caldwell/ui-components/compare/v0.0.3...v0.0.4) (2022-08-31)
+
+
+### Features
+
+* Adding goes to path on table ([#3](https://github.com/christopher-caldwell/ui-components/issues/3)) ([0e6c38f](https://github.com/christopher-caldwell/ui-components/commit/0e6c38f4907056df5600d95486db75e245f8e35f))
+
 ### [0.0.3](https://github.com/christopher-caldwell/ui-components/compare/v0.0.2...v0.0.3) (2022-08-30)
 
 
