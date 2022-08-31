@@ -11,7 +11,7 @@ function pathResolve(dir: string) {
 const shouldAnalyze = process.env.ANALYZE
 
 const config: UserConfig = {
-  base: '/mui-form-generator/',
+  base: '/ui-components/',
   resolve: {
     alias: [
       {
