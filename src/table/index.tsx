@@ -39,6 +39,9 @@ export const Table = function <TData extends { id: number | string | undefined }
     state: {
       sorting: sortingHandler[0]
     },
+    // defaultColumn: {
+
+    // },
     onSortingChange: sortingHandler[1],
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),

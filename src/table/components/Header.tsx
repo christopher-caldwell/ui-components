@@ -7,13 +7,14 @@ export const TableHead = function <TData extends { id: number | string | undefin
     <MuiTableHead>
       {table.getHeaderGroups().map(headerGroup => (
         <TableRow key={headerGroup.id}>
-          {headerGroup.headers.map(({ colSpan, id, column, getContext }) => {
+          {headerGroup.headers.map(({ colSpan, id, column, getContext, getSize }) => {
+            console.log('getSize', getSize())
             const isSorted = !!column.getIsSorted()
             const isSortedDesc = column.getIsSorted() === 'desc'
             const sortDirection = isSortedDesc ? 'desc' : 'asc'
             return (
               <TableCell
-                sx={{ borderRight: borderStyle, backgroundColor: colors.headerBackground }}
+                sx={{ borderRight: borderStyle, backgroundColor: colors.headerBackground, width: getSize() }}
                 key={id}
                 colSpan={colSpan}
                 sortDirection={sortDirection}
