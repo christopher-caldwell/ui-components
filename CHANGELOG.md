@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/christopher-caldwell/ui-components/compare/v0.0.5...v0.0.6) (2022-08-31)
+
+
+### Bug Fixes
+
+* Allowing for adjustable column widths ([76e5ff5](https://github.com/christopher-caldwell/ui-components/commit/76e5ff5f361cc7968221e5b41b3969a9afd1ea9b))
+
 ### [0.0.5](https://github.com/christopher-caldwell/ui-components/compare/v0.0.4...v0.0.5) (2022-08-31)
 
 
