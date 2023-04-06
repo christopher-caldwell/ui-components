@@ -1,12 +1,12 @@
 import { FC, PropsWithChildren } from 'react'
-import { Unstable_Grid2 as Grid, styled, SxProps, Theme, Box, Paper } from '@mui/material'
+import { Unstable_Grid2 as Grid, styled, SxProps, Theme, Box, Paper, GridSize } from '@mui/material'
 
 export const Section: FC<Props> = ({ children, boxSx, paperSx, header, headerAction }) => {
   return (
     <Box sx={{ marginBottom: '30px', padding: '0 24px', ...boxSx }}>
       {header ? (
-        <Grid container>
-          <Grid xs={12} md={9}>
+        <Grid container sx={{ display: 'flex', alignItems: 'center' }}>
+          <Grid xs={12} md={headerAction ? 9 : 12}>
             <Header>{header}</Header>
           </Grid>
           <Grid xs={12} md={3} justifyContent='flex-end' sx={{ display: 'flex' }}>
@@ -33,4 +33,7 @@ type Props = PropsWithChildren<{
   paperSx?: SxProps<Theme>
   header?: string
   headerAction?: JSX.Element
+  headerActionProps?: {
+    colSpan: GridSize
+  }
 }>
